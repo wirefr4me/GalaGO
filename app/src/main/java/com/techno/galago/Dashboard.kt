@@ -24,6 +24,7 @@ fun Dashboard() {
             SearchBar()
             Quick()
             Spots()
+            Social()
         }
         BotBar()
     }
