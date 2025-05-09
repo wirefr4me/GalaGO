@@ -9,10 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Dashboard() {
+fun Dashboard(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -22,7 +23,7 @@ fun Dashboard() {
             TopBar()
             HorizontalDivider(color = Color.LightGray, thickness = 1.dp)
             SearchBar()
-            Quick()
+            Quick(navController = navController)
             Spots()
             Social()
         }

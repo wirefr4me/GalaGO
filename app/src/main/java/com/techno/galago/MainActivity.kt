@@ -1,5 +1,6 @@
 package com.techno.galago
 
+import Plan
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,7 +31,17 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginScreen(navController = navController) }
-        composable("dashboard") { Dashboard() }
+        composable("login") {
+            LoginScreen(navController = navController)
+        }
+        composable("dashboard") {
+            Dashboard(navController = navController)
+        }
+        composable("plan") {
+            Plan(navController = navController)
+        }
+        composable("itinerary") {
+            ItineraryPage(navController = navController)
+        }
     }
 }

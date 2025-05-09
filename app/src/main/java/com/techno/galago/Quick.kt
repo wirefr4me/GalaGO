@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @Composable
 fun Quick() {
@@ -54,9 +55,14 @@ fun Quick() {
 }
 
 @Composable
-fun QuickActionButton(text: String, iconId: Int, modifier: Modifier = Modifier) {
+fun QuickActionButton(
+    text: String,
+    iconId: Int,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
+) {
     Button(
-        onClick = {},
+        onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF77C95B)),
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
@@ -71,7 +77,9 @@ fun QuickActionButton(text: String, iconId: Int, modifier: Modifier = Modifier) 
                 painter = painterResource(id = iconId),
                 contentDescription = text,
                 tint = Color.DarkGray,
-                modifier = Modifier.size(24.dp).padding(top = 4.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(top = 4.dp)
             )
             Text(
                 text = text,
@@ -81,5 +89,38 @@ fun QuickActionButton(text: String, iconId: Int, modifier: Modifier = Modifier) 
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
+    }
+}
+
+
+@Composable
+fun Quick(navController: NavHostController) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        QuickActionButton(
+            text = "Plan a Trip",
+            iconId = R.drawable.pencil,
+            modifier = Modifier.weight(1f),
+            onClick = { navController.navigate("plan") }
+        )
+        QuickActionButton(
+            text = "Saved Trips",
+            iconId = R.drawable.bookm,
+            modifier = Modifier.weight(1f)
+        )
+        QuickActionButton(
+            text = "Explore More",
+            iconId = R.drawable.map,
+            modifier = Modifier.weight(1f)
+        )
+        QuickActionButton(
+            text = "View Itinerary",
+            iconId = R.drawable.itinerary,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
