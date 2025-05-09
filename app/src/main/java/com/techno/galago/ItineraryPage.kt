@@ -1,7 +1,6 @@
 package com.techno.galago
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Star
@@ -27,7 +25,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -98,78 +95,68 @@ fun ItineraryPage(navController: NavHostController) {
             )
         }
     ) { paddingValues ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(16.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = tripDates,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(bottom = 16.dp),
-                textAlign = TextAlign.Left,
-                fontWeight = FontWeight.Bold
-            )
+            item {
+                Text(
+                    text = tripDates,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    textAlign = TextAlign.Left,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(16.dp))
-                    .padding(8.dp),
-                contentAlignment = Alignment.TopStart
-            ) {
-                Column(modifier = Modifier.padding(8.dp)) {
-                    Text(
-                        text = "Day 1",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    LazyColumn(
-                        userScrollEnabled = false,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        items(day1Items) { item ->
-                            ItineraryItemRow(item = item)
-                            if (day1Items.indexOf(item) < day1Items.size - 1) {
-                                HorizontalDivider()
-                            }
-                        }
-                    }
+            item {
+                Text(
+                    text = "Day 1",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Text(
-                        text = "Day 2",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    LazyColumn(
-                        userScrollEnabled = false,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        items(day2Items) { item ->
-                            ItineraryItemRow(item = item)
-                            if (day2Items.indexOf(item) < day2Items.size - 1) {
-                                HorizontalDivider()
-                            }
-                        }
-                    }
+            items(day1Items) { item ->
+                ItineraryItemRow(item = item)
+                if (day1Items.indexOf(item) < day1Items.size - 1) {
+                    HorizontalDivider()
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            item { Spacer(modifier = Modifier.height(16.dp)) }
 
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
-            ) {
-                Text("Save Itinerary")
+            item {
+                Text(
+                    text = "Day 2",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
+
+            items(day2Items) { item ->
+                ItineraryItemRow(item = item)
+                if (day2Items.indexOf(item) < day2Items.size - 1) {
+                    HorizontalDivider()
+                }
+            }
+
+            item { Spacer(modifier = Modifier.height(24.dp)) }
+
+            item {
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp)
+                ) {
+                    Text("Save Itinerary")
+                }
             }
         }
     }

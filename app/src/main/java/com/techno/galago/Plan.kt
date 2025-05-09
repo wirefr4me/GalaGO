@@ -117,7 +117,7 @@ fun Plan(navController: NavHostController) {
                     .semantics { testTag = "daysTextField" },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done
+                    imeAction = ImeAction.Next
                 ),
                 singleLine = true
             )
@@ -132,8 +132,8 @@ fun Plan(navController: NavHostController) {
                     .padding(bottom = 8.dp)
                     .semantics { testTag = "dateTextField" },
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
                 ),
                 singleLine = true
             )

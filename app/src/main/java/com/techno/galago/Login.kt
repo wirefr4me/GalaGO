@@ -3,7 +3,6 @@ package com.techno.galago
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -37,20 +37,14 @@ fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        item {
             Spacer(modifier = Modifier.height(200.dp))
             Image(
                 painter = painterResource(id = R.drawable.logo),
@@ -59,21 +53,16 @@ fun LoginScreen(navController: NavHostController) {
             )
         }
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
+        item {
             Text(
                 text = "Welcome back!",
                 fontSize = 28.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 32.dp)
             )
+        }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
+        item {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -81,9 +70,9 @@ fun LoginScreen(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp)
             )
+        }
 
-            Spacer(modifier = Modifier.height(12.dp))
-
+        item {
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -92,9 +81,9 @@ fun LoginScreen(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp)
             )
+        }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
+        item {
             Button(
                 onClick = {
                     Log.i("Credential", "Email : $email Password : $password")
@@ -112,17 +101,17 @@ fun LoginScreen(navController: NavHostController) {
             ) {
                 Text(text = "Continue", fontSize = 18.sp)
             }
+        }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
+        item {
             Text(text = "Forgot Password?")
+        }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
+        item {
             Text(text = "or")
+        }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
+        item {
             Button(
                 onClick = {},
                 colors = ButtonDefaults.buttonColors(
